@@ -93,6 +93,7 @@ alias la='ls -A'
 alias l='ls -CF'
 alias diskspace="du -S | sort -n -r |more"
 alias folders="find . -maxdepth 1 -type d -print | xargs du -sk | sort -rn"
+alias dld='axel -a -n 10'
 
 
 # Add an "alert" alias for long running commands.  Use like so:
