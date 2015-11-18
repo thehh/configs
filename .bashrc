@@ -94,8 +94,8 @@ alias l='ls -CF'
 alias diskspace="du -S | sort -n -r |more"
 alias folders="find . -maxdepth 1 -type d -print | xargs du -sk | sort -rn"
 alias dld='axel -a -n 10'
-
-
+alias mouse='sudo revoco click'
+alias mousebattery='sudo revoco battery'
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
@@ -160,3 +160,14 @@ function __setprompt {
   PS4='$LIGHT_CYAN+$NO_COLOUR '
 }
 __setprompt
+
+exec 9>&2
+exec 8> >(
+    while IFS='' read -r line || [ -n "$line" ]; do
+       echo -e "\033[31m${line}\033[0m"
+    done
+)
+function undirect(){ exec 2>&9; }
+function redirect(){ exec 2>&8; }
+trap "redirect;" DEBUG
+PROMPT_COMMAND='undirect;'
