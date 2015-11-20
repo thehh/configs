@@ -147,6 +147,7 @@ function __setprompt {
   local LIGHT_BLUE="\[\033[1;34m\]"
   local GREEN="\[\033[0;32m\]"
   local RED="\[\033[0;31m\]"
+  local LIGHT_RED="\[\033[0;91m\]"
   local LIGHT_GREEN="\[\033[1;32m\]"
   local LIGHT_CYAN="\[\033[1;36m\]"
   local NO_COLOUR="\[\033[0m\]"
@@ -164,7 +165,7 @@ __setprompt
 exec 9>&2
 exec 8> >(
     while IFS='' read -r line || [ -n "$line" ]; do
-       echo -e "\033[31m${line}\033[0m"
+       echo -e "\033[101m${line}\033[0m"
     done
 )
 function undirect(){ exec 2>&9; }
