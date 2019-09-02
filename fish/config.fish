@@ -30,6 +30,18 @@ function multi
     terminator --layout=myLayout
 end
 
+function newmac --no-scope-shadowing
+    openssl rand -hex 6 | sed 's/\(..\)/\1:/g; s/.$//'
+end
+
+function spoofmac --no-scope-shadowing
+    sudo ifconfig en0 ether (newmac)
+end
+
+function originalmac --no-scope-shadowing
+    sudo ifconfig en0 ether $argv[1]
+end
+
 function sudo --description 'Run command using sudo (use !! for last command)'
   if test (count $argv) -gt 0
       switch $argv[1]
